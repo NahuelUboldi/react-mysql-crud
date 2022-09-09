@@ -7,6 +7,10 @@ function InfoInputs() {
   const [position, setPosition] = useState('');
   const [wage, setWage] = useState(0);
 
+  const displayInfo = () => {
+    console.log(name, age, country, position, wage);
+  };
+
   return (
     <section className='information'>
       <label htmlFor='name'>Name: </label>
@@ -45,7 +49,7 @@ function InfoInputs() {
         id='wage'
         onChange={(e) => setWage(e.target.value)}
       />
-      <button>Add Employee</button>
+      <button onClick={displayInfo}>Add Employee</button>
     </section>
   );
 }
