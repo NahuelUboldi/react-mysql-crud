@@ -44,3 +44,15 @@ body {
   background-color: aquamarine;
   color: black;
 }
+.employee {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  border-radius: 0.4rem;
+  margin-block: 0.5rem;
+  padding: 0.5rem;
+}
+.employee h2,
+.employee p {
+  margin-block: 0.2rem;
+}

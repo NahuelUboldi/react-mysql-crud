@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Axios from 'axios';
+import Employee from './Employee';
 
 function InfoInputs() {
   const [name, setName] = useState('');
@@ -6,9 +8,27 @@ function InfoInputs() {
   const [country, setCountry] = useState('');
   const [position, setPosition] = useState('');
   const [wage, setWage] = useState(0);
+  const [employeeList, setEmployeeList] = useState([]);
 
-  const displayInfo = () => {
-    console.log(name, age, country, position, wage);
+  const addEmployee = () => {
+    if (name && age && country && position && wage) {
+      Axios.post('http://localhost:3000/create', {
+        name,
+        age,
+        country,
+        position,
+        wage,
+      }).then((r) => {
+        console.log('success');
+      });
+    } else {
+      console.log('empty fields');
+    }
+  };
+  const getEmployees = () => {
+    Axios.get('http://localhost:3000/read').then((r) => {
+      setEmployeeList(r.data);
+    });
   };
 
   return (
@@ -49,7 +69,21 @@ function InfoInputs() {
         id='wage'
         onChange={(e) => setWage(e.target.value)}
       />
-      <button onClick={displayInfo}>Add Employee</button>
+      <button onClick={addEmployee}>Add Employee</button>
+      <button onClick={getEmployees}>Get Employees</button>
+
+      {employeeList.map((employee, key) => {
+        return (
+          <Employee
+            key={employee.id}
+            name={employee.name}
+            age={employee.age}
+            country={employee.country}
+            position={employee.position}
+            wage={employee.wage}
+          />
+        );
+      })}
     </section>
   );
 }
