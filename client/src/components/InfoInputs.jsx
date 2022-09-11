@@ -10,6 +10,8 @@ function InfoInputs() {
   const [wage, setWage] = useState(0);
   const [employeeList, setEmployeeList] = useState([]);
 
+  const [newWage, setNewWage] = useState(0);
+
   const addEmployee = () => {
     if (name && age && country && position && wage) {
       Axios.post('http://localhost:3000/create', {
@@ -43,7 +45,7 @@ function InfoInputs() {
       <label htmlFor='age'>Age: </label>
       <input
         type='number'
-        age='age'
+        name='age'
         id='age'
         onChange={(e) => setAge(e.target.value)}
       />
@@ -51,21 +53,21 @@ function InfoInputs() {
       <label htmlFor='position'>Position: </label>
       <input
         type='text'
-        position='position'
+        name='position'
         id='position'
         onChange={(e) => setPosition(e.target.value)}
       />
       <label htmlFor='country'>Country: </label>
       <input
         type='text'
-        country='country'
+        name='country'
         id='country'
         onChange={(e) => setCountry(e.target.value)}
       />
       <label htmlFor='wage'>Wage (year): </label>
       <input
         type='number'
-        wage='wage'
+        name='wage'
         id='wage'
         onChange={(e) => setWage(e.target.value)}
       />
@@ -76,11 +78,14 @@ function InfoInputs() {
         return (
           <Employee
             key={employee.id}
+            id={employee.id}
             name={employee.name}
             age={employee.age}
             country={employee.country}
             position={employee.position}
             wage={employee.wage}
+            newWage={newWage}
+            setNewWage={setNewWage}
           />
         );
       })}
