@@ -59,7 +59,16 @@ app.put('/update', (req, res) => {
   );
 });
 
-// app.delete()
+app.delete('/delete/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('DELETE FROM employees WHERE id = ?', id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.listen(3000, () => {
   console.log('port running on port 3000');

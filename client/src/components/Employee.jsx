@@ -19,6 +19,10 @@ function Employee({
     );
   };
 
+  const deleteEmployee = (id) => {
+    Axios.delete(`http://localhost:3000/delete/${id}`);
+  };
+
   return (
     <div className='employee'>
       <h2>
@@ -41,6 +45,13 @@ function Employee({
           }}
         >
           update
+        </button>
+        <button
+          onClick={() => {
+            deleteEmployee(id);
+          }}
+        >
+          delete
         </button>
       </div>
     </div>
